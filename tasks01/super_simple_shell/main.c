@@ -8,7 +8,6 @@ int main(void)
 {
 	char *commands[] = {"", NULL};
 	char *ex = "exit";
-	char *enter = "\n";
 	char *prompt;
 	size_t size = 1024;
 	size_t child_pid;
@@ -23,8 +22,6 @@ int main(void)
 		child_pid = fork();
 		if (strcmp(commands[0], ex) == 0)
 			exit(0);
-		if (strcmp(commands[0], enter) == 0)
-			continue;
 		if (child_pid == -1)
 		{
 			perror("Error: ");
