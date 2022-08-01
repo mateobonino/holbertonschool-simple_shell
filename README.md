@@ -14,21 +14,21 @@ Shelleste is a simple command line prompt that use the basics commands presentis
 - No more than 5 functions per file.
 - All prototypes of all functions are included in header file ``main.h``.
 
-# Compilation
+### Compilation
 
 We compile with: 
 
     gcc -Wall -Wextra -Werror -pedantic -std=gnu89 -Wno-format *.c -o hsh
 
-# Use
+### Use
 
 To execute use:
 
 	./hsh
-# Commands allowed
+### Commands allowed
 
-# Examples
+### Examples
 
-# Authors
+### Authors
 
 
