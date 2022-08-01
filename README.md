@@ -8,11 +8,8 @@ Shelleste is a simple command line prompt that use the basics commands presentis
 
 ### Requirements
 
-- All your files will be compiled on Ubuntu 20.04 LTS using gcc, using the options **``-Wall -Werror -Wextra -pedantic -std=gnu89``**
-- Code uses the Betty style.
-- No global variables are allowed.
-- No more than 5 functions per file.
-- All prototypes of all functions are included in header file ``main.h``.
+- All your files will be compiled on Ubuntu 20.04 LTS using gcc.
+- All files must be in the same folder.
 
 ### Compilation
 
