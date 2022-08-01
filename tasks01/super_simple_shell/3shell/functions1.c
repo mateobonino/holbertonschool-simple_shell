@@ -1,30 +1,5 @@
 #include "main.h"
 
-int cmd_checker(char **commands)
-{
-	struct stat st;
-	char *cmd = command_verify(commands);
-
-	if (stat(commands[0], &st) == 0)
-	{
-		exec(commands);
-	}
-	else
-	{
-		if (is_builtin(commands) == 0)
-			run_built(commands);
-		else if (cmd != NULL)
-		{
-			commands[0] = cmd;
-			exec(commands);
-			free(cmd);
-		}
-		else
-			perror("Error: ");
-	}
-	return (0);
-}
-
 char **line_parse(char *prompt)
 {
 	char **tokens, *token;
@@ -34,8 +9,7 @@ char **line_parse(char *prompt)
 	if (tokens == NULL)
 	{
 		free(tokens);
-		printf("Error\n");
-		exit(1);
+		return (NULL);
 	}
 	token = strtok(prompt, " \n\t\r");
 	for (i = 0; token; i++)
@@ -46,14 +20,6 @@ char **line_parse(char *prompt)
 	tokens[i] = NULL;
 	free(token);
 	return (tokens);
-}
-
-void print_prompt(void)
-{
-	char *usr = _getenv("USER");
-	_puts(usr);
-	_putchar('@');
-	_puts("hsh> ");
 }
 
 char *_getenv(const char *name)
@@ -84,17 +50,11 @@ char *line_read(void)
 	size_t size = 1024;
 	status = getline(&cmd, &size, stdin);
 
-	if (status == -1)
+	if (feof(stdin) || status == NULL)
 	{
-		if (status == EOF)
-		{
-			printf("\n");
-		}
-		else
-		{
-			printf("Error\n");
-			exit (1);
-		}
+		printf("\n");
+		free(cmd);
+		exit(0);
 	}
 	return (cmd);
 }

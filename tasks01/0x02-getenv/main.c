@@ -7,6 +7,6 @@
 int main(void)
 {
 	char *varName = "PATH";
-	printf("%s\n", _getenv("PATH"));
+	printf("%s\n", _getenv("USER"));
 	return (0);
 }
