@@ -28,4 +28,4 @@ To execute use:
 
 ### Authors
 
-
+Written by Mateo Bonino and [Alejandro Montenegro](www.linkedin.com/in/alejandro-montenegro-505233184 "Alejandro Montenegro")
