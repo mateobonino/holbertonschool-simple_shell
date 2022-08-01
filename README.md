@@ -1,8 +1,7 @@
 ![](https://i.imgur.com/UR1EDSZ.jpg)
 
-# LA SHELLESTE - The Shell
 
-## SHELLESTE
+# SHELLESTE
 
 Shelleste is a simple command line prompt that use the basics commands presentis in bash.
 
