@@ -22,6 +22,9 @@ int exec(char **commands)
 
 int is_builtin(char **commands)
 {
+	int ex_cmd = _strcmp(commands[0], "exit");
+	int cd_cmd = _strcmp(commands[0], "cd");
+	int env_cmd = _strcmp(commands[0], "env");
 	if (_strcmp(commands[0], "exit") == 0)
 		return (0);
 	else if (_strcmp(commands[0], "cd") == 0)
@@ -57,5 +60,7 @@ char *command_verify(char **commands)
 		}
 		temp = strtok(NULL, ":");
 	}
+	free(temp);
+	free(fpath);
 	return (NULL);
 }
