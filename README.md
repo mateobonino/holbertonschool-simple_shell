@@ -1,4 +1,4 @@
-![](https://i.imgur.com/dcsHk7A.jpg)
+![](https://i.imgur.com/UR1EDSZ.jpg)
 
 # LA SHELLESTE - The Shell
 
