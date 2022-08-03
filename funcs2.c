@@ -5,12 +5,12 @@
 */
 char *sh_read(void)
 {
-	int i = 0, j = 0;
+	int i = 0, status;
 	char *cmd = NULL;
 	size_t size;
 
 	fflush(stdin);
-	int status = getline(&cmd, &size, stdin);
+	status = getline(&cmd, &size, stdin);
 
 	if (feof(stdin) || !status)
 	{

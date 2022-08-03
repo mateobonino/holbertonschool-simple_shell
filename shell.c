@@ -5,9 +5,9 @@
 * @av: array of args
 * Return: always 0
 */
-int main(int ac, char **av[])
+int main(int ac __attribute__((unused)), char **av __attribute__((unused)))
 {
-	int fork_status, i = 0;
+	int fork_status;
 	char *prompt = NULL, **commands = NULL, **checked_args = NULL;
 
 	while (1)
