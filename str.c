@@ -43,27 +43,43 @@ char *_strdup(char *str)
 	return (p);
 }
 /**
-* _strcat - concatenates two strings
-* @dest: first string
-* @src: string to concatenate
-* Return: the concatenated string
+* *str_concat - concatenates two strings
+* @s1: first string
+* @s2: second string
+*Return: returns the concatenated string
+*
 */
-char *_strcat(char *dest, char *src)
+char *str_concat(char *s1, char *s2)
 {
-	int i, j;
+	long int i, j, s1len, s2len;
+	char *a;
 
-	i = 0;
-	j = 0;
-
-	while (dest[i++])
+	if (s1 == NULL)
 	{
-		j++;
+		s1 = "";
 	}
-	for (i = 0; src[i]; i++)
+	if (s2 == NULL)
 	{
-		dest[j++] = src[i];
+		s2 = "";
 	}
-	return (dest);
+	s1len = charlen(s1);
+	s2len = charlen(s2);
+	a = malloc(sizeof(char) * s1len + s2len + 1);
+	if (a == NULL)
+	{
+		return (NULL);
+	}
+	for (i = 0; i < s1len; i++)
+	{
+		a[i] = s1[i];
+	}
+	for (j = 0; j < s2len; j++)
+	{
+		a[i] = s2[j];
+		i++;
+	}
+	a[i] = '\0';
+	return (a);
 }
 /**
 * charlen - gets the length of a string

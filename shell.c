@@ -20,6 +20,7 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused)))
 			free(prompt);
 			continue;
 		}
+		prompt = strtok(prompt, "\n");
 		commands = parse_cmd(prompt);
 		checked_args = checked(commands);
 		if (checked_args == NULL)
@@ -31,9 +32,22 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused)))
 		if (fork_status == 1)
 		{
 			free(prompt);
-			free(commands);
+			free_commands(commands);
 			continue;
 		}
+		free_commands(commands);
 	}
+	free(prompt);
 	return (EXIT_SUCCESS);
+}
+
+void free_commands(char **commands)
+{
+	int i = 0;
+
+	for (i = 0; commands[i]; i++)
+	{
+		free(commands[i]);
+	}
+	free(commands);
 }

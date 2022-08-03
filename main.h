@@ -13,6 +13,7 @@
 #include <string.h>
 
 extern char **environ;
+void free_commands(char **);
 char *sh_read(void);
 char **parse_cmd(char *prompt);
 char *check(char **commands);
@@ -20,6 +21,7 @@ int _strcmp(char *s1, char *s2);
 int _putchar(char c);
 char *_strdup(char *str);
 char *_strcat(char *dest, char *src);
+char *str_concat(char *, char *);
 int charlen(char *s);
 void _puts(char *str);
 char *cmd_verify(char **commands);

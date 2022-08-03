@@ -19,11 +19,15 @@ char *sh_read(void)
 		exit(0);
 	}
 	if (strcmp(cmd, "\n") == 0)
+	{
+		free(cmd);
 		return (NULL);
+	}
 	for (i = 0; cmd[i] != '\n'; i++)
 	{
 		if (cmd[i] != ' ' && cmd[i] != '\t')
 			return (cmd);
 	}
+	free(cmd);
 	return (NULL);
 }

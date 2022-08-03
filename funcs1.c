@@ -80,24 +80,27 @@ int exec_args(char **checked_args)
 */
 char *cmd_verify(char **commands)
 {
-	char *path, *temp, *fpath;
+	char *path, *temp, *fpath, *tok;
 	struct stat st;
 
 	path = getenv("PATH");
-	temp = strdup(path);
-	temp = strtok(temp, ":");
-	while (temp)
+	tok = strtok(path, ":");
+	while (tok)
 	{
-		fpath = strdup(temp);
-		strcat(fpath, "/");
-		strcat(fpath, commands[0]);
-		if (stat(fpath, &st) == 0)
+		fpath = str_concat(tok, "/");
+		temp = str_concat(fpath, commands[0]);
+		if (stat(temp, &st) == 0)
 		{
-			return (fpath);
+			free(fpath);
+			return (temp);
 		}
-		temp = strtok(NULL, ":");
+		free(temp);
+		free(fpath);
+		tok = strtok(NULL, ":");
 	}
+	free(path);
 	free(temp);
+	free(fpath);
 	return (NULL);
 }
 /**
