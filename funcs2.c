@@ -19,6 +19,8 @@ char *sh_read(void)
 			putchar('\n');
 		exit(0);
 	}
+	if (!isatty(STDIN_FILENO))
+		status = 0;
 	if (strcmp(cmd, "\n") == 0)
 		return (NULL);
 	while (cmd[i] != '\n')
