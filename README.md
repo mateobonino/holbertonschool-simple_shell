@@ -5,26 +5,53 @@
 
 Shelleste is a simple command line prompt that use the basics commands presentis in bash.
 
-### Requirements
 
-- All your files will be compiled on Ubuntu 20.04 LTS using gcc.
-- All files must be in the same folder.
+## Use
 
-### Compilation
+First of all, compile all files using:
 
-We compile with: 
+	$ gcc -Wall -Wextra -Werror -pedantic -std=gnu89 -Wno-format *.c -o hsh
+To run the shell type:
 
-    gcc -Wall -Wextra -Werror -pedantic -std=gnu89 -Wno-format *.c -o hsh
+	$ ./hsh
 
-### Use
+And for exit press: ``Ctrl+D``
 
-To execute use:
+##Useful commands:
 
-	./hsh
-### Commands allowed
+| Command | Function |
+| :-----------:|:---------:|
+|  ls | Lists files and directories. |
+|  cp | Copy files. |
+|  mv | Move files. |
+|  rm | Remove files. |
+|  pwd | Show the current directory. |
 
-### Examples
+## Examples
+Using ls:
 
-### Authors
+	> ls -l
 
-Written by Mateo Bonino and [Alejandro Montenegro](www.linkedin.com/in/alejandro-montenegro-505233184 "Alejandro Montenegro")
+Prompt:
+
+	total 84
+	-rw-r--r-- 1 root root     1 Aug  4 15:16 AUTHORS
+	-rw-r--r-- 1 root root   586 Aug  4 15:16 README.md
+	-rwxr-xr-x 1 root root 21712 Aug  4 15:16 a.out
+	-rw-r--r-- 1 root root  2337 Aug  4 15:16 funcs1.c
+	-rw-r--r-- 1 root root   541 Aug  4 15:16 funcs2.c
+	-rw-r--r-- 1 root root   393 Aug  4 15:16 generate_authors.sh
+	-rwxr-xr-x 1 root root 21712 Aug  4 15:16 hsh
+	-rw-r--r-- 1 root root   707 Aug  4 15:16 main.h
+	-rw-r--r-- 1 root root     0 Aug  4 15:16 man_1_simple_shell
+	-rw-r--r-- 1 root root   714 Aug  4 15:16 shell.c
+	-rw-r--r-- 1 root root  1313 Aug  4 15:16 str.c
+	-rw-r--r-- 1 root root    93 Aug  4 15:16 str2.c
+	-rw-r--r-- 1 root root     0 Aug  4 15:16 test
+	-rw-r--r-- 1 root root     0 Aug  4 15:21 test2
+
+## Files
+
+## Authors
+
+Written by Mateo Bonino and Alejandro Montenegro
