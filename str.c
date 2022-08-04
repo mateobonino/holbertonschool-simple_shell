@@ -42,44 +42,22 @@ char *_strdup(char *str)
 	p[j] = '\0';
 	return (p);
 }
-/**
-* *str_concat - concatenates two strings
-* @s1: first string
-* @s2: second string
-*Return: returns the concatenated string
-*
-*/
-char *str_concat(char *s1, char *s2)
+char *_strcat(char *dest, char *src)
 {
-	long int i, j, s1len, s2len;
-	char *a;
+	int i, j;
 
-	if (s1 == NULL)
+	i = 0;
+	j = 0;
+
+	while (dest[i++])
 	{
-		s1 = "";
+		j++;
 	}
-	if (s2 == NULL)
+	for (i = 0; src[i]; i++)
 	{
-		s2 = "";
+		dest[j++] = src[i];
 	}
-	s1len = charlen(s1);
-	s2len = charlen(s2);
-	a = malloc(sizeof(char) * s1len + s2len + 1);
-	if (a == NULL)
-	{
-		return (NULL);
-	}
-	for (i = 0; i < s1len; i++)
-	{
-		a[i] = s1[i];
-	}
-	for (j = 0; j < s2len; j++)
-	{
-		a[i] = s2[j];
-		i++;
-	}
-	a[i] = '\0';
-	return (a);
+	return (dest);
 }
 /**
 * charlen - gets the length of a string

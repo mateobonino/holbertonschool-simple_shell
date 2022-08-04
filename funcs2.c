@@ -7,7 +7,7 @@ char *sh_read(void)
 {
 	int i = 0, status;
 	char *cmd = NULL;
-	size_t size;
+	size_t size = 0;
 
 	fflush(stdin);
 	status = getline(&cmd, &size, stdin);
@@ -15,19 +15,17 @@ char *sh_read(void)
 	if (feof(stdin) || !status)
 	{
 		free(cmd);
-		putchar('\n');
+		if (isatty(STDIN_FILENO))
+			putchar('\n');
 		exit(0);
 	}
 	if (strcmp(cmd, "\n") == 0)
-	{
-		free(cmd);
 		return (NULL);
-	}
-	for (i = 0; cmd[i] != '\n'; i++)
+	while (cmd[i] != '\n')
 	{
 		if (cmd[i] != ' ' && cmd[i] != '\t')
 			return (cmd);
+		i++;
 	}
-	free(cmd);
 	return (NULL);
 }

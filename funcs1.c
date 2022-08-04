@@ -31,15 +31,8 @@ char **parse_cmd(char *prompt)
 */
 int prompt_check(char *prompt)
 {
-	int i = 0, promptLen = strlen(prompt), spaces = 0;
+	int i = 0, promptLen = strlen(prompt);
 
-	for (i = 0; prompt[i] != '\0'; i++)
-	{
-		if (prompt[i] == ' ')
-			spaces++;
-	}
-	if (spaces == promptLen - 2)
-		return (1);
 	if (prompt[i] == '\t' && prompt[promptLen - 1] == '\n')
 		return (1);
 	else if (strcmp(prompt, "clear\n") == 0)
@@ -60,7 +53,7 @@ int exec_args(char **checked_args)
 	child_pid = fork();
 	if (child_pid == -1)
 	{
-		perror("Error");
+		perror("Error:");
 		return (1);
 	} else if (child_pid == 0)
 	{
@@ -80,27 +73,24 @@ int exec_args(char **checked_args)
 */
 char *cmd_verify(char **commands)
 {
-	char *path, *temp, *fpath, *tok;
+	char *path, *temp, *fpath;
 	struct stat st;
 
 	path = getenv("PATH");
-	tok = strtok(path, ":");
-	while (tok)
+	temp = strdup(path);
+	temp = strtok(temp, ":");
+	while (temp)
 	{
-		fpath = str_concat(tok, "/");
-		temp = str_concat(fpath, commands[0]);
-		if (stat(temp, &st) == 0)
+		fpath = strdup(temp);
+		strcat(fpath, "/");
+		strcat(fpath, commands[0]);
+		if (stat(fpath, &st) == 0)
 		{
-			free(fpath);
-			return (temp);
+			return (fpath);
 		}
-		free(temp);
-		free(fpath);
-		tok = strtok(NULL, ":");
+		temp = strtok(NULL, ":");
 	}
-	free(path);
 	free(temp);
-	free(fpath);
 	return (NULL);
 }
 /**
@@ -115,18 +105,18 @@ char **checked(char **commands)
 
 	if (stat(commands[0], &st) == 0)
 	{
-		/*has path*/
+		/*printf("has PATH\n");*/
 		return (commands);
 	}
 	else
 	{
-		/*HAS NOT PATH, CHECKING THE COMMANDS*/
+		/*printf("HAS NOT PATH, CHECKING THE COMMANDS\n");*/
 		cmd = cmd_verify(commands);
 		if (cmd != NULL)
 		{
-			/*COMMANDS ARE OK*/
+			/*printf("CMD CHECKED OK\n");*/
 			commands[0] = cmd;
-			return (commands);
+			return (commands); free(cmd);
 
 		}
 		else
