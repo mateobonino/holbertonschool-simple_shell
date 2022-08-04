@@ -28,6 +28,7 @@ And for exit press: ``Ctrl+D``
 |  pwd | Show the current directory. |
 
 ## Examples
+
 Using ls:
 
 	> ls -l
@@ -51,6 +52,13 @@ Prompt:
 	-rw-r--r-- 1 root root     0 Aug  4 15:21 test2
 
 ## Files
+
+- **``shell.c``** : main file.
+- **``main.h``** : header file.
+- **``funcs1.c``** : file containing functions.
+- **``funcs2.c``** : file containing the functions that did not enter in the other.
+- **``str.c``** : file containing functions for strings.
+- **``str2.c``** : file containing the functions that did not enter in the other.
 
 ## Authors
 
