@@ -1,7 +1,7 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#define MAX_SIZE 1024;
+#define MAX_SIZE 1024
 #define C_TERMINAL "\033[H\033[J"
 #include <stdio.h>
 #include <stdlib.h>

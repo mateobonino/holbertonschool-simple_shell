@@ -42,6 +42,12 @@ char *_strdup(char *str)
 	p[j] = '\0';
 	return (p);
 }
+/**
+* _strcat - concatenates two string
+* @dest: the first string
+* @src: the second string
+* Return: the concatenated string
+*/
 char *_strcat(char *dest, char *src)
 {
 	int i, j;
