@@ -33,7 +33,10 @@ char **parse_cmd(char *prompt)
 int exec_args(char **checked_args)
 {
 	pid_t child_pid;
-	int status = 0, ret_val = 0;
+	int status = 0, ret_val;
+
+	if (!isatty(STDIN_FILENO))
+		ret_val = 0;
 
 	child_pid = fork();
 	if (child_pid == -1)
@@ -117,7 +120,7 @@ int checked(char **commands, char **av)
 			gatorr(av, commands[0], "not found", i);
 			free(cmd);
 			free(commands);
-			status = 127;
+			status = 555;
 		}
 	}
 	return (status);

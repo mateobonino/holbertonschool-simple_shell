@@ -41,7 +41,7 @@ int main(int ac __attribute__((unused)), char **av)
 			if (!isatty(STDIN_FILENO))
 			{
 				ex_status = 127;
-				exit(127);
+				return (ex_status);
 			}
 		}
 		free(prompt);
