@@ -33,7 +33,7 @@ char **parse_cmd(char *prompt)
 int exec_args(char **checked_args)
 {
 	pid_t child_pid;
-	int status;
+	int status, ret_val;
 
 	child_pid = fork();
 	if (child_pid == -1)
@@ -43,13 +43,13 @@ int exec_args(char **checked_args)
 	} else if (child_pid == 0)
 	{
 		execve(checked_args[0], checked_args, NULL);
-		exit(0);
 	}
 	else
 	{
 		wait(&status);
+		ret_val = WEXITSTATUS(status);
 	}
-	return (0);
+	return (ret_val);
 }
 /**
 * cmd_verify - verifies if command exists in the path
@@ -66,9 +66,7 @@ char *cmd_verify(char **commands)
 	aux = strtok(temp, ":");
 	while (aux)
 	{
-		/*fpath = malloc(sizeof(char) * strlen(aux) + strlen(commands[0]) + 2);*/
 		fpath = malloc(sizeof(char) * 1024);
-		/*fpath = _strdup(aux);*/
 		strcpy(fpath, aux);
 		_strcat(fpath, "/");
 		_strcat(fpath, commands[0]);
@@ -78,6 +76,7 @@ char *cmd_verify(char **commands)
 			return (fpath);
 		}
 		free(fpath);
+		fpath = NULL;
 		aux = strtok(NULL, ":");
 	}
 	free(temp);
@@ -89,17 +88,17 @@ char *cmd_verify(char **commands)
 * @av: executable file name
 * Return: the command
 */
-char **checked(char **commands, char **av)
+int checked(char **commands, char **av)
 {
-	int i = 1;
+	int i = 1, status = 0;
 	char *cmd = NULL;
 	struct stat st;
 
 	if (stat(commands[0], &st) == 0)
 	{
-		exec_args(commands);
+		status = exec_args(commands);
 		free(commands);
-		/*return (commands);*/
+		return (status);
 	}
 	else
 	{
@@ -108,9 +107,10 @@ char **checked(char **commands, char **av)
 		{
 			commands[0] = cmd;
 			/*return (commands);*/
-			exec_args(commands);
+			status = exec_args(commands);
 			free(cmd);
 			free(commands);
+			return (status);
 
 		}
 		else
@@ -118,8 +118,8 @@ char **checked(char **commands, char **av)
 			gatorr(av, commands[0], "not found", i);
 			free(cmd);
 			free(commands);
-			return (NULL);
+			return (127);
 		}
 	}
-	return (NULL);
+	return (status);
 }

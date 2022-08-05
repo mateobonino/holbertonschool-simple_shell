@@ -7,7 +7,7 @@
 */
 int main(int ac __attribute__((unused)), char **av)
 {
-	/*int fork_status = 0;*/
+	int ex_status = 0;
 	char *prompt = NULL, **commands = NULL/*, ***checked_args = NULL*/;
 
 	signal(SIGINT, SIG_IGN);
@@ -38,9 +38,9 @@ int main(int ac __attribute__((unused)), char **av)
 			free(prompt);
 			continue;
 		}
-		checked(commands, av);
+		ex_status = checked(commands, av);
 		free(prompt);
 	}
 	free(commands);
-	return (EXIT_SUCCESS);
+	return (ex_status);
 }

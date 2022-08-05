@@ -25,7 +25,7 @@ char *_strcat(char *dest, char *src);
 int charlen(char *s);
 void _puts(char *str);
 char *cmd_verify(char **commands);
-char **checked(char **commands, char **av);
+int checked(char **commands, char **av);
 void run_cmd(char **args);
 int prompt_check(char *prompt);
 int exec_args(char **checked_args);
