@@ -98,6 +98,7 @@ char **checked(char **commands, char **av)
 	if (stat(commands[0], &st) == 0)
 	{
 		exec_args(commands);
+		free(commands);
 		/*return (commands);*/
 	}
 	else
@@ -109,12 +110,14 @@ char **checked(char **commands, char **av)
 			/*return (commands);*/
 			exec_args(commands);
 			free(cmd);
+			free(commands);
 
 		}
 		else
 		{
 			gatorr(av, commands[0], "not found", i);
 			free(cmd);
+			free(commands);
 			return (NULL);
 		}
 	}

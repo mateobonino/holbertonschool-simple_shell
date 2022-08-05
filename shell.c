@@ -8,7 +8,7 @@
 int main(int ac __attribute__((unused)), char **av)
 {
 	/*int fork_status = 0;*/
-	char *prompt = NULL, **commands = NULL, **checked_args = NULL;
+	char *prompt = NULL, **commands = NULL/*, ***checked_args = NULL*/;
 
 	signal(SIGINT, SIG_IGN);
 	_puts(C_TERMINAL);
@@ -37,10 +37,7 @@ int main(int ac __attribute__((unused)), char **av)
 			_puts(C_TERMINAL);
 			continue;
 		}
-		checked_args = checked(commands, av);
-		if (checked_args == NULL)
-			continue;
-		free(commands);
+		/*checked_args = */checked(commands, av);
 		free(prompt);
 	}
 	free(commands);
