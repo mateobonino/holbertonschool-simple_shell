@@ -17,23 +17,25 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused)))
 			write(1, "> ", 2);
 		prompt = sh_read();
 		if (!prompt)
-		{
-			free(prompt);
 			continue;
-		}
 		commands = parse_cmd(prompt);
 		checked_args = checked(commands);
 		if (checked_args == NULL)
-		{
 			continue;
-		}
 		fork_status = exec_args(checked_args);
 		if (fork_status == 1)
 		{
-			free(prompt);
+			/*while (commands[i])
+			{
+				free(commands[i]);
+				i++;
+			}*/
 			free(commands);
 			continue;
 		}
+		free(commands);
+		free(prompt);
 	}
+	free(commands);
 	return (EXIT_SUCCESS);
 }

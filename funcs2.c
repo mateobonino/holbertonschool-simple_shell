@@ -12,7 +12,7 @@ char *sh_read(void)
 	fflush(stdin);
 	status = getline(&cmd, &size, stdin);
 
-	if (feof(stdin) || !status)
+	if (feof(stdin) || status == EOF)
 	{
 		free(cmd);
 		if (isatty(STDIN_FILENO))
@@ -22,12 +22,15 @@ char *sh_read(void)
 	if (!isatty(STDIN_FILENO))
 		status = 0;
 	if (strcmp(cmd, "\n") == 0)
+	{
 		return (NULL);
+	}
 	while (cmd[i] != '\n')
 	{
 		if (cmd[i] != ' ' && cmd[i] != '\t')
 			return (cmd);
 		i++;
 	}
+	free(cmd);
 	return (NULL);
 }

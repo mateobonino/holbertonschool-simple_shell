@@ -7,11 +7,13 @@
 char **parse_cmd(char *prompt)
 {
 	char **tokens, *token = NULL;
-	int size = 1024, i = 0;
+	int size = 20, i = 0;
 
 	tokens = malloc(sizeof(char *) * size);
 	if (!tokens)
 	{
+		free(prompt);
+		free(tokens);
 		return (NULL);
 	}
 	token = strtok(prompt, " \n\r\a\t");
@@ -21,7 +23,6 @@ char **parse_cmd(char *prompt)
 		token = strtok(NULL, " \n\r\a\t");
 	}
 	tokens[i] = NULL;
-	free(token);
 	return (tokens);
 }
 /**
@@ -48,7 +49,7 @@ int prompt_check(char *prompt)
 int exec_args(char **checked_args)
 {
 	pid_t child_pid;
-	int status;
+	int status, i = 0;
 
 	child_pid = fork();
 	if (child_pid == -1)
@@ -73,22 +74,24 @@ int exec_args(char **checked_args)
 */
 char *cmd_verify(char **commands)
 {
-	char *path, *temp, *fpath;
+	char *path, *temp, *fpath = NULL, *aux = NULL;
 	struct stat st;
 
 	path = getenv("PATH");
 	temp = strdup(path);
-	temp = strtok(temp, ":");
-	while (temp)
+	aux = strtok(temp, ":");
+	while (aux)
 	{
-		fpath = strdup(temp);
+		fpath = malloc(sizeof(char) * strlen(aux) + strlen(commands[0]) + 4);
+		fpath = strdup(aux);
 		strcat(fpath, "/");
 		strcat(fpath, commands[0]);
 		if (stat(fpath, &st) == 0)
 		{
 			return (fpath);
 		}
-		temp = strtok(NULL, ":");
+		free(fpath);
+		aux = strtok(NULL, ":");
 	}
 	free(temp);
 	return (NULL);
@@ -105,18 +108,15 @@ char **checked(char **commands)
 
 	if (stat(commands[0], &st) == 0)
 	{
-		/*printf("has PATH\n");*/
 		return (commands);
 	}
 	else
 	{
-		/*printf("HAS NOT PATH, CHECKING THE COMMANDS\n");*/
 		cmd = cmd_verify(commands);
 		if (cmd != NULL)
 		{
-			/*printf("CMD CHECKED OK\n");*/
 			commands[0] = cmd;
-			return (commands); free(cmd);
+			return (commands);
 
 		}
 		else
