@@ -11,6 +11,7 @@ int main(int ac __attribute__((unused)), char **av)
 	char *prompt = NULL, **commands = NULL, **checked_args = NULL;
 
 	signal(SIGINT, SIG_IGN);
+	_puts(C_TERMINAL);
 	while (1)
 	{
 		print_prompt();
