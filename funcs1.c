@@ -7,7 +7,7 @@
 char **parse_cmd(char *prompt)
 {
 	char **tokens, *token = NULL;
-	int size = 20, i = 0;
+	int size = 30, i = 0;
 
 	tokens = malloc(sizeof(char *) * size);
 	if (!tokens)
@@ -24,22 +24,6 @@ char **parse_cmd(char *prompt)
 	}
 	tokens[i] = NULL;
 	return (tokens);
-}
-/**
-* prompt_check - checks the content of the prompt
-* @prompt: the line entered by user
-* Return: 1 in special case, 0 otherwise
-*/
-int prompt_check(char *prompt)
-{
-	int i = 0, promptLen = strlen(prompt);
-
-	if (prompt[i] == '\t' && prompt[promptLen - 1] == '\n')
-		return (1);
-	else if (strcmp(prompt, "clear\n") == 0)
-		return (2);
-	else
-		return (0);
 }
 /**
 * exec_args - execs the args with fork()
@@ -77,15 +61,15 @@ char *cmd_verify(char **commands)
 	char *path, *temp, *fpath = NULL, *aux = NULL;
 	struct stat st;
 
-	path = getenv("PATH");
-	temp = strdup(path);
+	path = _getenv("PATH");
+	temp = _strdup(path);
 	aux = strtok(temp, ":");
 	while (aux)
 	{
 		fpath = malloc(sizeof(char) * strlen(aux) + strlen(commands[0]) + 4);
-		fpath = strdup(aux);
-		strcat(fpath, "/");
-		strcat(fpath, commands[0]);
+		fpath = _strdup(aux);
+		_strcat(fpath, "/");
+		_strcat(fpath, commands[0]);
 		if (stat(fpath, &st) == 0)
 		{
 			return (fpath);

@@ -13,6 +13,7 @@
 #include <string.h>
 
 extern char **environ;
+char *_strcat(char *, char *);
 char *sh_read(void);
 char **parse_cmd(char *prompt);
 char *check(char **commands);
@@ -27,5 +28,8 @@ char **checked(char **commands);
 void run_cmd(char **args);
 int prompt_check(char *prompt);
 int exec_args(char **checked_args);
+char *_getenv(const char *);
+int charlen(char *);
+char *str_concat(char *, char *);
 
 #endif /*MAIN_H*/

@@ -16,7 +16,7 @@ char *sh_read(void)
 	{
 		free(cmd);
 		if (isatty(STDIN_FILENO))
-			putchar('\n');
+			_putchar('\n');
 		exit(0);
 	}
 	if (!isatty(STDIN_FILENO))
@@ -32,5 +32,31 @@ char *sh_read(void)
 		i++;
 	}
 	free(cmd);
+	return (NULL);
+}
+/**
+* _getenv - looks for a environment variable
+* @name: the variable to look for
+* Return: the value if found, NULL otherwise
+*/
+char *_getenv(const char *name)
+{
+	int i, j, found;
+
+	for (i = 0; environ[i]; i++)
+	{
+		found = 1;
+		for (j = 0; environ[i][j] != '='; j++)
+		{
+			if (name[j] != environ[i][j])
+			{
+				found = 0;
+				break;
+			}
+		}
+
+		if (found)
+			return (&environ[i][j + 1]);
+	}
 	return (NULL);
 }

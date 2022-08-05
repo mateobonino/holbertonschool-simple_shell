@@ -14,7 +14,10 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused)))
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
-			write(1, "> ", 2);
+		{
+			_puts(_getenv("USER"));
+			_puts("@sh> ");
+		}
 		prompt = sh_read();
 		if (!prompt)
 			continue;
