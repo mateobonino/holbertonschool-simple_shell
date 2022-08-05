@@ -33,7 +33,7 @@ char **parse_cmd(char *prompt)
 int exec_args(char **checked_args)
 {
 	pid_t child_pid;
-	int status, ret_val;
+	int status = 0, ret_val = 0;
 
 	child_pid = fork();
 	if (child_pid == -1)
@@ -47,7 +47,8 @@ int exec_args(char **checked_args)
 	else
 	{
 		wait(&status);
-		ret_val = WEXITSTATUS(status);
+		if (WEXITSTATUS(status))
+			ret_val = WEXITSTATUS(status);
 	}
 	return (ret_val);
 }
@@ -98,7 +99,6 @@ int checked(char **commands, char **av)
 	{
 		status = exec_args(commands);
 		free(commands);
-		return (status);
 	}
 	else
 	{
@@ -110,7 +110,6 @@ int checked(char **commands, char **av)
 			status = exec_args(commands);
 			free(cmd);
 			free(commands);
-			return (status);
 
 		}
 		else
@@ -118,7 +117,7 @@ int checked(char **commands, char **av)
 			gatorr(av, commands[0], "not found", i);
 			free(cmd);
 			free(commands);
-			return (127);
+			status = 127;
 		}
 	}
 	return (status);

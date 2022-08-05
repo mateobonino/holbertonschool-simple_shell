@@ -21,8 +21,8 @@ int main(int ac __attribute__((unused)), char **av)
 		if (_strcmp(commands[0], "exit") == 0)
 		{
 			free(prompt);
-			free(commands);
-			exit(0);
+			/*free(commands);*/
+			break;
 		}
 		if (_strcmp(commands[0], "env") == 0)
 		{
@@ -39,8 +39,10 @@ int main(int ac __attribute__((unused)), char **av)
 			continue;
 		}
 		ex_status = checked(commands, av);
+		/*printf("actual status: %d\n", ex_status);*/
 		free(prompt);
 	}
 	free(commands);
+	/*printf("status: %d\n", ex_status);*/
 	return (ex_status);
 }
