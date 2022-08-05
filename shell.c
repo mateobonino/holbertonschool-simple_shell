@@ -36,14 +36,8 @@ int main(int ac __attribute__((unused)), char **av)
 			break;
 		}
 		ex_status = checked(commands, av);
-		if (ex_status == 555)
-		{
-			if (!isatty(STDIN_FILENO))
-			{
-				ex_status = 127;
-				return (ex_status);
-			}
-		}
+		if (!isatty(STDIN_FILENO))
+			return (ex_status);
 		free(prompt);
 	}
 	free(commands);

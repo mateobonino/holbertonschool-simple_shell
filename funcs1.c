@@ -102,6 +102,7 @@ int checked(char **commands, char **av)
 	{
 		status = exec_args(commands);
 		free(commands);
+		return (status);
 	}
 	else
 	{
@@ -113,6 +114,7 @@ int checked(char **commands, char **av)
 			status = exec_args(commands);
 			free(cmd);
 			free(commands);
+			return (status);
 
 		}
 		else
@@ -120,7 +122,8 @@ int checked(char **commands, char **av)
 			gatorr(av, commands[0], "not found", i);
 			free(cmd);
 			free(commands);
-			status = 555;
+			status = 127;
+			return (status);
 		}
 	}
 	return (status);
