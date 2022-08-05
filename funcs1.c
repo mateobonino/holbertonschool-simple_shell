@@ -49,7 +49,7 @@ int prompt_check(char *prompt)
 int exec_args(char **checked_args)
 {
 	pid_t child_pid;
-	int status, i = 0;
+	int status;
 
 	child_pid = fork();
 	if (child_pid == -1)
