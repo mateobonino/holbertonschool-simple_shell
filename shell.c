@@ -7,7 +7,7 @@
 */
 int main(int ac __attribute__((unused)), char **av)
 {
-	int ex_status = 0, i = 0;
+	int ex_status = 0;
 	char *prompt = NULL, **commands = NULL;
 
 	signal(SIGINT, SIG_IGN);
@@ -33,15 +33,17 @@ int main(int ac __attribute__((unused)), char **av)
 		if (_strcmp(_getenv("PATH"), "") == 0)
 		{
 			free(prompt);
-			gatorr(av, commands[0], "not found", i);
 			ex_status = 127;
 			break;
 		}
 		ex_status = checked(commands, av);
-		if (!isatty(STDIN_FILENO))
+		if (ex_status == 555)
 		{
-			free(prompt);
-			return (ex_status);
+			if (!isatty(STDIN_FILENO))
+			{
+				ex_status = 127;
+				return (ex_status);
+			}
 		}
 		free(prompt);
 	}
