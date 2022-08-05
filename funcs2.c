@@ -98,12 +98,18 @@ int _printenv(void)
 */
 void gatorr(char **av, char *cmd, char *msg, int num __attribute__((unused)))
 {
-	_puts(av[0]);
+	write(2, av[0], strlen(av[0]));
+	write(2, ": 1: ", 5);
+	write(2, cmd, strlen(cmd));
+	write(2, ": ", 2);
+	write(2, msg, strlen(msg));
+	write(2, "\n", 1);
+	/*_puts(av[0]);
 	_puts(": ");
 	_putchar('1');
 	_puts(": ");
 	_puts(cmd);
 	_puts(": ");
 	_puts(msg);
-	_putchar('\n');
+	_putchar('\n');*/
 }
