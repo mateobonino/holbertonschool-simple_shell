@@ -17,7 +17,9 @@ To run the shell type:
 
 And for exit press: ``Ctrl+D``
 
-##Useful commands:
+Or type: ``exit`` in the prompt
+
+## Useful commands:
 
 | Command | Function |
 | :-----------:|:---------:|
@@ -33,7 +35,7 @@ Using ls:
 
 	> ls -l
 
-Prompt:
+Output:
 
 	total 84
 	-rw-r--r-- 1 root root     1 Aug  4 15:16 AUTHORS
