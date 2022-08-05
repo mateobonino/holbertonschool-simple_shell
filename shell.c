@@ -8,7 +8,7 @@
 int main(int ac __attribute__((unused)), char **av)
 {
 	int ex_status = 0;
-	char *prompt = NULL, **commands = NULL/*, ***checked_args = NULL*/;
+	char *prompt = NULL, **commands = NULL;
 
 	signal(SIGINT, SIG_IGN);
 	while (1)
@@ -21,7 +21,6 @@ int main(int ac __attribute__((unused)), char **av)
 		if (_strcmp(commands[0], "exit") == 0)
 		{
 			free(prompt);
-			/*free(commands);*/
 			break;
 		}
 		if (_strcmp(commands[0], "env") == 0)
@@ -31,18 +30,14 @@ int main(int ac __attribute__((unused)), char **av)
 			_printenv();
 			continue;
 		}
-		if (_strcmp(commands[0], "clear") == 0)
+		if (_strcmp(_getenv("PATH"), "") == 0)
 		{
-			_puts(C_TERMINAL);
-			free(commands);
-			free(prompt);
-			continue;
+			ex_status = 127;
+			break;
 		}
 		ex_status = checked(commands, av);
-		/*printf("actual status: %d\n", ex_status);*/
 		free(prompt);
 	}
 	free(commands);
-	/*printf("status: %d\n", ex_status);*/
 	return (ex_status);
 }
