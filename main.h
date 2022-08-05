@@ -13,6 +13,8 @@
 #include <string.h>
 
 extern char **environ;
+void print_prompt(void);
+int _printenv(void);
 char *_strcat(char *, char *);
 char *sh_read(void);
 char **parse_cmd(char *prompt);

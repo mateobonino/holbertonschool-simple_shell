@@ -13,15 +13,24 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused)))
 	signal(SIGINT, SIG_IGN);
 	while (1)
 	{
-		if (isatty(STDIN_FILENO))
-		{
-			_puts(_getenv("USER"));
-			_puts("@sh> ");
-		}
+		print_prompt();
 		prompt = sh_read();
 		if (!prompt)
 			continue;
 		commands = parse_cmd(prompt);
+		if (strcmp(commands[0], "exit") == 0)
+		{
+			free(prompt);
+			free(commands);
+			exit(0);
+		}
+		if (strcmp(commands[0], "env") == 0)
+		{
+			free(commands);
+			free(prompt);
+			_printenv();
+			continue;
+		}
 		checked_args = checked(commands);
 		if (checked_args == NULL)
 			continue;

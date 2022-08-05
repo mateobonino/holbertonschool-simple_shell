@@ -35,6 +35,18 @@ char *sh_read(void)
 	return (NULL);
 }
 /**
+* print_prompt - prints the prompt of the shell
+* Return: void func
+*/
+void print_prompt(void)
+{
+	if (isatty(STDIN_FILENO))
+	{
+		_puts(_getenv("USER"));
+		_puts("@sh> ");
+	}
+}
+/**
 * _getenv - looks for a environment variable
 * @name: the variable to look for
 * Return: the value if found, NULL otherwise
@@ -59,4 +71,19 @@ char *_getenv(const char *name)
 			return (&environ[i][j + 1]);
 	}
 	return (NULL);
+}
+/**
+* _printenv - prints environment variables
+* Return: void function
+*/
+int _printenv(void)
+{
+	int i = 0;
+	while (environ[i])
+	{
+		_puts(environ[i]);
+		_putchar('\n');
+		i++;
+	}
+	return (0);
 }

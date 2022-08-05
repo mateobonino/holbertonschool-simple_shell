@@ -105,6 +105,7 @@ char **checked(char **commands)
 		}
 		else
 		{
+
 			perror("Error");
 			free(cmd);
 		}
