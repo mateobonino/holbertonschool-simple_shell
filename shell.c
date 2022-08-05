@@ -25,11 +25,6 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused)))
 		fork_status = exec_args(checked_args);
 		if (fork_status == 1)
 		{
-			/*while (commands[i])
-			{
-				free(commands[i]);
-				i++;
-			}*/
 			free(commands);
 			continue;
 		}
