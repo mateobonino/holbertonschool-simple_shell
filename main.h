@@ -26,12 +26,13 @@ char *_strcat(char *dest, char *src);
 int charlen(char *s);
 void _puts(char *str);
 char *cmd_verify(char **commands);
-char **checked(char **commands);
+char **checked(char **commands, char **av);
 void run_cmd(char **args);
 int prompt_check(char *prompt);
 int exec_args(char **checked_args);
 char *_getenv(const char *);
 int charlen(char *);
 char *str_concat(char *, char *);
+void gatorr(char **, char *, char *, int);
 
 #endif /*MAIN_H*/

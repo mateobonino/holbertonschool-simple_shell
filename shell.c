@@ -5,7 +5,7 @@
 * @av: array of args
 * Return: always 0
 */
-int main(int ac __attribute__((unused)), char **av __attribute__((unused)))
+int main(int ac __attribute__((unused)), char **av)
 {
 	int fork_status = 0;
 	char *prompt = NULL, **commands = NULL, **checked_args = NULL;
@@ -31,7 +31,7 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused)))
 			_printenv();
 			continue;
 		}
-		checked_args = checked(commands);
+		checked_args = checked(commands, av);
 		if (checked_args == NULL)
 			continue;
 		fork_status = exec_args(checked_args);

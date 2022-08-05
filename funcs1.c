@@ -66,7 +66,7 @@ char *cmd_verify(char **commands)
 	aux = strtok(temp, ":");
 	while (aux)
 	{
-		fpath = malloc(sizeof(char) * strlen(aux) + strlen(commands[0]) + 4);
+		fpath = malloc(sizeof(char) * strlen(aux) + strlen(commands[0]) + 2);
 		fpath = _strdup(aux);
 		_strcat(fpath, "/");
 		_strcat(fpath, commands[0]);
@@ -85,8 +85,9 @@ char *cmd_verify(char **commands)
 * @commands: the commands entered by user
 * Return: the command
 */
-char **checked(char **commands)
+char **checked(char **commands, char **av)
 {
+	int i = 1;
 	char *cmd = NULL;
 	struct stat st;
 
@@ -105,8 +106,7 @@ char **checked(char **commands)
 		}
 		else
 		{
-
-			perror("Error");
+			gatorr(av, commands[0], "not found", i);
 			free(cmd);
 		}
 	}

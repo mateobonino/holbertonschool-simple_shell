@@ -87,3 +87,22 @@ int _printenv(void)
 	}
 	return (0);
 }
+/**
+* gatorr - prints error msg
+* @av: the executable name
+* @cmd: the command
+* @msg: msg to print
+* @num: the num of error
+* Return: void func
+*/
+void gatorr(char **av, char *cmd, char *msg, int num __attribute__((unused)))
+{
+	_puts(av[0]);
+	_puts(": ");
+	_putchar('1');
+	_puts(": ");
+	_puts(cmd);
+	_puts(": ");
+	_puts(msg);
+	_putchar('\n');
+}
