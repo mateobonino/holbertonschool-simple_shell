@@ -79,6 +79,7 @@ char *_getenv(const char *name)
 int _printenv(void)
 {
 	int i = 0;
+
 	while (environ[i])
 	{
 		_puts(environ[i]);
