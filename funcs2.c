@@ -43,7 +43,7 @@ void print_prompt(void)
 	if (isatty(STDIN_FILENO))
 	{
 		_puts(_getenv("USER"));
-		_puts("@sh> ");
+		_puts("@shls> ");
 	}
 }
 /**

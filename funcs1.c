@@ -9,7 +9,7 @@ char **parse_cmd(char *prompt)
 	char **tokens, *token = NULL;
 	int size = 30, i = 0;
 
-	tokens = malloc(sizeof(char *) * size);
+	tokens = malloc(sizeof(char *) * size + 1);
 	if (!tokens)
 	{
 		free(prompt);
@@ -66,12 +66,15 @@ char *cmd_verify(char **commands)
 	aux = strtok(temp, ":");
 	while (aux)
 	{
-		fpath = malloc(sizeof(char) * strlen(aux) + strlen(commands[0]) + 2);
-		fpath = _strdup(aux);
+		/*fpath = malloc(sizeof(char) * strlen(aux) + strlen(commands[0]) + 2);*/
+		fpath = malloc(sizeof(char) * 1024);
+		/*fpath = _strdup(aux);*/
+		strcpy(fpath, aux);
 		_strcat(fpath, "/");
 		_strcat(fpath, commands[0]);
 		if (stat(fpath, &st) == 0)
 		{
+			free(temp);
 			return (fpath);
 		}
 		free(fpath);
@@ -83,6 +86,7 @@ char *cmd_verify(char **commands)
 /**
 * checked - checks what kind of command entered the user
 * @commands: the commands entered by user
+* @av: executable file name
 * Return: the command
 */
 char **checked(char **commands, char **av)
@@ -93,7 +97,8 @@ char **checked(char **commands, char **av)
 
 	if (stat(commands[0], &st) == 0)
 	{
-		return (commands);
+		exec_args(commands);
+		/*return (commands);*/
 	}
 	else
 	{
@@ -101,14 +106,17 @@ char **checked(char **commands, char **av)
 		if (cmd != NULL)
 		{
 			commands[0] = cmd;
-			return (commands);
+			/*return (commands);*/
+			exec_args(commands);
+			free(cmd);
 
 		}
 		else
 		{
 			gatorr(av, commands[0], "not found", i);
 			free(cmd);
+			return (NULL);
 		}
 	}
-	return (commands);
+	return (NULL);
 }

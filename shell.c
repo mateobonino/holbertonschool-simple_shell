@@ -7,7 +7,7 @@
 */
 int main(int ac __attribute__((unused)), char **av)
 {
-	int fork_status = 0;
+	/*int fork_status = 0;*/
 	char *prompt = NULL, **commands = NULL, **checked_args = NULL;
 
 	signal(SIGINT, SIG_IGN);
@@ -18,28 +18,27 @@ int main(int ac __attribute__((unused)), char **av)
 		if (!prompt)
 			continue;
 		commands = parse_cmd(prompt);
-		if (strcmp(commands[0], "exit") == 0)
+		if (_strcmp(commands[0], "exit") == 0)
 		{
 			free(prompt);
 			free(commands);
 			exit(0);
 		}
-		if (strcmp(commands[0], "env") == 0)
+		if (_strcmp(commands[0], "env") == 0)
 		{
 			free(commands);
 			free(prompt);
 			_printenv();
 			continue;
 		}
+		if (_strcmp(commands[0], "clear") == 0)
+		{
+			_puts(C_TERMINAL);
+			continue;
+		}
 		checked_args = checked(commands, av);
 		if (checked_args == NULL)
 			continue;
-		fork_status = exec_args(checked_args);
-		if (fork_status == 1)
-		{
-			free(commands);
-			continue;
-		}
 		free(commands);
 		free(prompt);
 	}
