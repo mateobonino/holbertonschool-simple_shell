@@ -42,7 +42,7 @@ int exec_args(char **checked_args)
 		return (1);
 	} else if (child_pid == 0)
 	{
-		execve(checked_args[0], checked_args, NULL);
+		execve(checked_args[0], checked_args, environ);
 	}
 	else
 	{
