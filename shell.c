@@ -40,9 +40,8 @@ int main(int ac __attribute__((unused)), char **av)
 		ex_status = checked(commands, av);
 		if (!isatty(STDIN_FILENO))
 		{
-			free(commands);
 			free(prompt);
-			return(ex_status);
+			return (ex_status);
 		}
 		free(prompt);
 	}
