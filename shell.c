@@ -34,9 +34,11 @@ int main(int ac __attribute__((unused)), char **av)
 		if (_strcmp(commands[0], "clear") == 0)
 		{
 			_puts(C_TERMINAL);
+			free(commands);
+			free(prompt);
 			continue;
 		}
-		/*checked_args = */checked(commands, av);
+		checked(commands, av);
 		free(prompt);
 	}
 	free(commands);
