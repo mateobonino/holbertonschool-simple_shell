@@ -8,7 +8,7 @@
  */
 int _putchar(char c)
 {
-	return (write(1, &c, 1));
+	return (write(2, &c, 1));
 }
 /**
 * *_strdup - returns a pointer to a newly allocated space in memory

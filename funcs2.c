@@ -42,8 +42,8 @@ void print_prompt(void)
 {
 	if (isatty(STDIN_FILENO))
 	{
-		_puts(_getenv("USER"));
-		_puts("@shls> ");
+		write(1, _getenv("USER"), strlen(_getenv("USER")));
+		write(1, "@shls> ", 7);
 	}
 }
 /**
